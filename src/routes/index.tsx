@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { AppShell, PageHeader } from "@/components/AppShell";
 import { AiBadge, AiOrb } from "@/components/AiBadge";
 import {
@@ -9,7 +10,7 @@ import {
   student,
   todaySchedule,
 } from "@/lib/mock-data";
-import { ChevronRight, Lock, Check, Bell, Flame } from "lucide-react";
+import { ChevronRight, Lock, Check, Bell, Flame, Wand2 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
