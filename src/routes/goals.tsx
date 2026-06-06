@@ -1,8 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell, PageHeader } from "@/components/AppShell";
 import { AiBadge } from "@/components/AiBadge";
 import { categoryMeta, deadlines, goals, productivity, weekDays } from "@/lib/mock-data";
-import { Flame, TrendingUp, Sparkles } from "lucide-react";
+import { Flame, TrendingUp, Sparkles, Plus } from "lucide-react";
 
 export const Route = createFileRoute("/goals")({
   head: () => ({ meta: [{ title: "Goal Progress · AI Life Manager" }] }),
@@ -78,7 +78,16 @@ function GoalsPage() {
 
       {/* Goals */}
       <section className="mt-6 px-5">
-        <h2 className="text-[15px] font-semibold text-foreground">Active goals</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-[15px] font-semibold text-foreground">Active goals</h2>
+          <Link
+            to="/plan"
+            className="inline-flex items-center gap-1 rounded-full bg-gradient-ai px-3 py-1.5 text-[11px] font-semibold text-ai-foreground shadow-ai"
+          >
+            <Plus className="h-3 w-3" />
+            New goal
+          </Link>
+        </div>
         <div className="mt-3 space-y-3">
           {goals.map((g) => {
             const meta = categoryMeta[g.category];

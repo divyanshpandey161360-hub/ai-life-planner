@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PlanRouteImport } from './routes/plan'
 import { Route as GoalsRouteImport } from './routes/goals'
 import { Route as ConflictsRouteImport } from './routes/conflicts'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as IndexRouteImport } from './routes/index'
 
+const PlanRoute = PlanRouteImport.update({
+  id: '/plan',
+  path: '/plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GoalsRoute = GoalsRouteImport.update({
   id: '/goals',
   path: '/goals',
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/calendar': typeof CalendarRoute
   '/conflicts': typeof ConflictsRoute
   '/goals': typeof GoalsRoute
+  '/plan': typeof PlanRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/calendar': typeof CalendarRoute
   '/conflicts': typeof ConflictsRoute
   '/goals': typeof GoalsRoute
+  '/plan': typeof PlanRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,27 @@ export interface FileRoutesById {
   '/calendar': typeof CalendarRoute
   '/conflicts': typeof ConflictsRoute
   '/goals': typeof GoalsRoute
+  '/plan': typeof PlanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/assistant' | '/calendar' | '/conflicts' | '/goals'
+  fullPaths:
+    | '/'
+    | '/assistant'
+    | '/calendar'
+    | '/conflicts'
+    | '/goals'
+    | '/plan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/assistant' | '/calendar' | '/conflicts' | '/goals'
-  id: '__root__' | '/' | '/assistant' | '/calendar' | '/conflicts' | '/goals'
+  to: '/' | '/assistant' | '/calendar' | '/conflicts' | '/goals' | '/plan'
+  id:
+    | '__root__'
+    | '/'
+    | '/assistant'
+    | '/calendar'
+    | '/conflicts'
+    | '/goals'
+    | '/plan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,10 +99,18 @@ export interface RootRouteChildren {
   CalendarRoute: typeof CalendarRoute
   ConflictsRoute: typeof ConflictsRoute
   GoalsRoute: typeof GoalsRoute
+  PlanRoute: typeof PlanRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/plan': {
+      id: '/plan'
+      path: '/plan'
+      fullPath: '/plan'
+      preLoaderRoute: typeof PlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/goals': {
       id: '/goals'
       path: '/goals'
@@ -125,6 +155,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalendarRoute: CalendarRoute,
   ConflictsRoute: ConflictsRoute,
   GoalsRoute: GoalsRoute,
+  PlanRoute: PlanRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

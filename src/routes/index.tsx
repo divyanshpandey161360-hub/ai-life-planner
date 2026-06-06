@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { AppShell, PageHeader } from "@/components/AppShell";
 import { AiBadge, AiOrb } from "@/components/AiBadge";
 import {
@@ -9,7 +10,7 @@ import {
   student,
   todaySchedule,
 } from "@/lib/mock-data";
-import { ChevronRight, Lock, Check, Bell, Flame } from "lucide-react";
+import { ChevronRight, Lock, Check, Bell, Flame, Wand2 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,12 +23,11 @@ export const Route = createFileRoute("/")({
 });
 
 function Dashboard() {
-  const greeting = (() => {
+  const [greeting, setGreeting] = useState("Hello");
+  useEffect(() => {
     const h = new Date().getHours();
-    if (h < 12) return "Good morning";
-    if (h < 17) return "Good afternoon";
-    return "Good evening";
-  })();
+    setGreeting(h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening");
+  }, []);
 
   const nextUp = todaySchedule.find((t) => !t.done) ?? todaySchedule[0];
   const completed = todaySchedule.filter((t) => t.done).length;
@@ -75,6 +75,26 @@ function Dashboard() {
           </div>
         </div>
       </section>
+
+      {/* Plan a new goal CTA */}
+      <section className="mt-4 px-5">
+        <Link
+          to="/plan"
+          className="group flex items-center gap-3 rounded-2xl border border-border bg-card p-3.5 shadow-card transition hover:bg-muted"
+        >
+          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-ai shadow-ai">
+            <Wand2 className="h-4 w-4 text-ai-foreground" />
+          </span>
+          <div className="flex-1">
+            <p className="text-[13.5px] font-semibold text-foreground">Plan a new goal</p>
+            <p className="text-[11.5px] text-muted-foreground">
+              AI builds milestones, study blocks, mocks & revisions.
+            </p>
+          </div>
+          <ChevronRight className="h-4 w-4 text-muted-foreground transition group-hover:translate-x-0.5" />
+        </Link>
+      </section>
+
 
       {/* AI recommendations */}
       <section className="mt-7 px-5">
