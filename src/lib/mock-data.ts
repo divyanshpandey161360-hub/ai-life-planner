@@ -128,21 +128,56 @@ export type Conflict = {
   id: string;
   a: { title: string; time: string; category: Category };
   b: { title: string; time: string; category: Category };
-  suggestion: string;
+  analysis: string;
+  recommended: { action: string; detail: string };
+  alternative: { action: string; detail: string };
 };
 
 export const conflicts: Conflict[] = [
   {
     id: "c1",
-    a: { title: "Coding Club Meet", time: "Thu · 19:30 – 20:30", category: "club" },
-    b: { title: "Capstone Sprint Review", time: "Thu · 19:00 – 20:00", category: "project" },
-    suggestion: "Shift Sprint Review to Wed 20:00 — your team is free and Thursday energy is low.",
+    a: { title: "DSA Practice", time: "7 PM - 8 PM", category: "dsa" },
+    b: { title: "Coding Club Meeting", time: "7 PM - 8:30 PM", category: "club" },
+    analysis:
+      "Placement preparation is currently behind schedule by 20%. DSA is on the critical path for upcoming interviews, while the club meeting is a recurring non-blocking event.",
+    recommended: {
+      action: "Move DSA session to 8:30 PM",
+      detail: "Shifting DSA to 8:30 PM creates a clean 60-min post-meeting focus block with no overlap. Your evening deep-work scores peak after 8 PM.",
+    },
+    alternative: {
+      action: "Extend weekend focus block by 45 minutes",
+      detail: "Compensate by adding a 45-min DSA catch-up block on Saturday morning (9:00 - 9:45 AM). Your Saturday focus consistency is 92%.",
+    },
   },
   {
     id: "c2",
-    a: { title: "DSA: Graphs deep dive", time: "Sat · 10:00 – 12:00", category: "dsa" },
-    b: { title: "Gym — Leg Day", time: "Sat · 10:30 – 11:30", category: "gym" },
-    suggestion: "Move Leg Day to 07:00. Saturday mornings have your highest gym adherence (92%).",
+    a: { title: "Coding Club Meet", time: "Thu \u00b7 19:30 \u2013 20:30", category: "club" },
+    b: { title: "Capstone Sprint Review", time: "Thu \u00b7 19:00 \u2013 20:00", category: "project" },
+    analysis:
+      "Capstone demo is in 3 days. Sprint review is a hard deadline with external stakeholders. Club meeting attendance is flexible this week.",
+    recommended: {
+      action: "Shift Sprint Review to Wed 20:00",
+      detail: "Wednesday evening has zero conflicts. Team availability is confirmed. Moving the review one day earlier reduces schedule risk.",
+    },
+    alternative: {
+      action: "Shorten Club Meet to 30 minutes",
+      detail: "Attend only the first 30 minutes of the club meeting (19:00 - 19:30) and join Sprint Review immediately after at 19:30.",
+    },
+  },
+  {
+    id: "c3",
+    a: { title: "DSA: Graphs deep dive", time: "Sat \u00b7 10:00 \u2013 12:00", category: "dsa" },
+    b: { title: "Gym \u2014 Leg Day", time: "Sat \u00b7 10:30 \u2013 11:30", category: "gym" },
+    analysis:
+      "Leg day is fixed with your training partner. Saturday DSA session is AI-generated and movable. Gym adherence drops to 41% when rescheduled.",
+    recommended: {
+      action: "Move DSA to 07:00 Saturday",
+      detail: "Early morning DSA slots have your highest retention (89%). Gym stays fixed at 10:30. You gain 30 min of buffer time.",
+    },
+    alternative: {
+      action: "Split DSA into two 60-min blocks",
+      detail: "Do Graphs theory 07:00-08:00 and problems 14:00-15:00. Spaced practice improves retention by up to 23%.",
+    },
   },
 ];
 
