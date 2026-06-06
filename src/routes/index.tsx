@@ -76,6 +76,26 @@ function Dashboard() {
         </div>
       </section>
 
+      {/* Plan a new goal CTA */}
+      <section className="mt-4 px-5">
+        <Link
+          to="/plan"
+          className="group flex items-center gap-3 rounded-2xl border border-border bg-card p-3.5 shadow-card transition hover:bg-muted"
+        >
+          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-ai shadow-ai">
+            <Wand2 className="h-4 w-4 text-ai-foreground" />
+          </span>
+          <div className="flex-1">
+            <p className="text-[13.5px] font-semibold text-foreground">Plan a new goal</p>
+            <p className="text-[11.5px] text-muted-foreground">
+              AI builds milestones, study blocks, mocks & revisions.
+            </p>
+          </div>
+          <ChevronRight className="h-4 w-4 text-muted-foreground transition group-hover:translate-x-0.5" />
+        </Link>
+      </section>
+
+
       {/* AI recommendations */}
       <section className="mt-7 px-5">
         <SectionTitle title="AI suggestions" badge />
