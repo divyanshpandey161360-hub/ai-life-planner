@@ -35,7 +35,7 @@ function Dashboard() {
   return (
     <AppShell>
       <PageHeader
-        eyebrow="Today · " + new Date().toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" })
+        eyebrow={`Today · ${new Date().toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" })}`}
         title={`${greeting}, ${student.name}`}
         subtitle="Your AI has tuned today around your energy and deadlines."
         right={
