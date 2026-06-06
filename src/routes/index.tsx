@@ -23,12 +23,11 @@ export const Route = createFileRoute("/")({
 });
 
 function Dashboard() {
-  const greeting = (() => {
+  const [greeting, setGreeting] = useState("Hello");
+  useEffect(() => {
     const h = new Date().getHours();
-    if (h < 12) return "Good morning";
-    if (h < 17) return "Good afternoon";
-    return "Good evening";
-  })();
+    setGreeting(h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening");
+  }, []);
 
   const nextUp = todaySchedule.find((t) => !t.done) ?? todaySchedule[0];
   const completed = todaySchedule.filter((t) => t.done).length;
