@@ -1,8 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell, PageHeader } from "@/components/AppShell";
 import { AiBadge } from "@/components/AiBadge";
 import { categoryMeta, deadlines, goals, productivity, weekDays } from "@/lib/mock-data";
-import { Flame, TrendingUp, Sparkles } from "lucide-react";
+import { Flame, TrendingUp, Sparkles, Plus } from "lucide-react";
 
 export const Route = createFileRoute("/goals")({
   head: () => ({ meta: [{ title: "Goal Progress · AI Life Manager" }] }),
