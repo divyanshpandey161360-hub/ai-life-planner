@@ -192,3 +192,11 @@
 @utility animate-float-in {
   animation: float-in 0.4s ease-out both;
 }
+
+@keyframes page-enter {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@utility animate-page-enter {
+  animation: page-enter 0.3s ease-out both;
+}
