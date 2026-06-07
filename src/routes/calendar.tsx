@@ -12,6 +12,9 @@ export const Route = createFileRoute("/calendar")({
 
 function WeekView() {
   const [day, setDay] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const events = weekEvents.filter((e) => e.day === day);
   const ROW = 56; // px per hour
 
@@ -27,7 +30,7 @@ function WeekView() {
       {/* Day pills */}
       <div className="px-5">
         <div className="flex items-center justify-between">
-          <button className="grid h-8 w-8 place-items-center rounded-full bg-surface shadow-card">
+          <button className="grid h-8 w-8 place-items-center rounded-full bg-surface shadow-card active:scale-90 transition-transform">
             <ChevronLeft className="h-4 w-4" />
           </button>
           <div className="flex gap-1.5">
@@ -39,7 +42,7 @@ function WeekView() {
                   key={d}
                   onClick={() => setDay(i)}
                   className={[
-                    "flex flex-col items-center rounded-2xl px-2 py-1.5 transition",
+                    "flex flex-col items-center rounded-2xl px-2 py-1.5 transition active:scale-90",
                     active
                       ? "bg-primary text-primary-foreground shadow-card"
                       : "text-muted-foreground hover:bg-muted",
@@ -51,7 +54,7 @@ function WeekView() {
               );
             })}
           </div>
-          <button className="grid h-8 w-8 place-items-center rounded-full bg-surface shadow-card">
+          <button className="grid h-8 w-8 place-items-center rounded-full bg-surface shadow-card active:scale-90 transition-transform">
             <ChevronRight className="h-4 w-4" />
           </button>
         </div>
@@ -74,7 +77,7 @@ function WeekView() {
           ))}
 
           {/* Now indicator on Mon (day 0) */}
-          {day === 0 && <NowLine startHour={hours[0]} rowHeight={ROW} />}
+          {mounted && day === 0 && <NowLine startHour={hours[0]} rowHeight={ROW} />}
 
           {/* events */}
           {events.map((e, i) => {
