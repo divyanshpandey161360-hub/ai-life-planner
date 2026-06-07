@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AppShell, PageHeader } from "@/components/AppShell";
 import { AiBadge } from "@/components/AiBadge";
 import { categoryMeta, hours, weekDays, weekEvents } from "@/lib/mock-data";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export const Route = createFileRoute("/calendar")({
