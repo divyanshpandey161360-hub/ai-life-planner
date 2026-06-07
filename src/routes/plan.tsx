@@ -124,6 +124,7 @@ function PlanPage() {
         title="Plan a goal"
         subtitle="Tell the AI what you want. It will build your weeks."
         right={<AiBadge label="Planner" />}
+        backTo="/goals"
       />
 
       {/* Intro card */}
