@@ -23,11 +23,21 @@ export const Route = createFileRoute("/")({
 });
 
 function Dashboard() {
-  const [greeting, setGreeting] = useState("Hello");
+  const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    const h = new Date().getHours();
-    setGreeting(h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening");
+    setMounted(true);
   }, []);
+
+  const greeting = mounted
+    ? (() => {
+        const h = new Date().getHours();
+        return h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening";
+      })()
+    : "Hello";
+
+  const todayDate = mounted
+    ? new Date().toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" })
+    : "Today";
 
   const nextUp = todaySchedule.find((t) => !t.done) ?? todaySchedule[0];
   const completed = todaySchedule.filter((t) => t.done).length;
@@ -35,11 +45,11 @@ function Dashboard() {
   return (
     <AppShell>
       <PageHeader
-        eyebrow={`Today · ${new Date().toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" })}`}
+        eyebrow={todayDate}
         title={`${greeting}, ${student.name}`}
         subtitle="Your AI has tuned today around your energy and deadlines."
         right={
-          <button className="relative grid h-10 w-10 place-items-center rounded-full bg-surface shadow-card">
+          <button className="relative grid h-10 w-10 place-items-center rounded-full bg-surface shadow-card active:scale-90 transition-transform">
             <Bell className="h-5 w-5 text-foreground" />
             <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-cat-placement" />
           </button>
